@@ -102,3 +102,17 @@ plt.xticks(rotation=45)
 ax3.yaxis.set_major_formatter(mtick.PercentFormatter())
 
 # %%
+
+portfolio_hist = pd.concat([MELI_19['Adj Close'],
+                           NASDAQ_19['Adj Close'],
+                           SP500_19['Adj Close']], axis = 1)
+
+portfolio_returns = np.log(portfolio_hist / portfolio_hist.shift(1))
+portfolio_returns.columns = ['MELI','NASDAQ','SP500']
+
+cov_matrix = portfolio_returns.cov()*250
+
+corr_matrix = portfolio_returns.corr()
+
+
+
